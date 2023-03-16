@@ -16,7 +16,7 @@ import (
 func Provider() *schema.Provider {
 	p := &schema.Provider{
 		Schema: map[string]*schema.Schema{
-			"user": &schema.Schema{
+			"username": &schema.Schema{
 				Type:        schema.TypeString,
 				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("ZABBIX_USER", nil),
@@ -87,7 +87,7 @@ func providerConfigure(d *schema.ResourceData, terraformVersion string) (interfa
 
 	api.SetClient(client)
 
-	if _, err := api.Login(d.Get("user").(string), d.Get("password").(string)); err != nil {
+	if _, err := api.Login(d.Get("username").(string), d.Get("password").(string)); err != nil {
 		return nil, err
 	}
 
